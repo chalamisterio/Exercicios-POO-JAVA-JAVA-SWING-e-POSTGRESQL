@@ -13,13 +13,15 @@ import com.mycompany.cadlivro.controller.LivroController; // Import correto
 import java.awt.CardLayout;
 import java.awt.GraphicsConfiguration;
 import java.awt.HeadlessException;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
   
 
     public class LivroView extends javax.swing.JFrame {
+      
         // CORREÇÃO: Use o tipo da sua classe Controller, não a do Java Module
-
+Livro li = new Livro();
         private LivroController livroController;
 
         public LivroView(LivroController livroController) throws HeadlessException {
@@ -45,7 +47,7 @@ import javax.swing.JOptionPane;
     initComponents(); // inicializa todos os componentes da interface
     this.livroController = new LivroController(this); // conecta o controller à view
 }
-    
+    int auxi=0;
 
         /**
          * Creates new form LivroWiew
@@ -81,17 +83,17 @@ import javax.swing.JOptionPane;
         jScrollPane1 = new javax.swing.JScrollPane();
         resposta = new javax.swing.JTextArea();
         botaoConsulta = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
+        viraPaginaMais = new javax.swing.JButton();
+        viraPaginaMenos = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jPanel4_1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        consultaExclui = new javax.swing.JTextField();
+        botaoConsultaExclui = new javax.swing.JButton();
+        excluir = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        telaMostraObj = new javax.swing.JTextArea();
         jPanel5 = new javax.swing.JPanel();
         jPanel5_1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -264,11 +266,11 @@ import javax.swing.JOptionPane;
         botaoConsulta.setText("Consultar");
         botaoConsulta.addActionListener(this::botaoConsultaActionPerformed);
 
-        jButton8.setText("Virar Pagina +");
-        jButton8.addActionListener(this::jButton8ActionPerformed);
+        viraPaginaMais.setText("Virar Pagina +");
+        viraPaginaMais.addActionListener(this::viraPaginaMaisActionPerformed);
 
-        jButton9.setText("Virar Pagina -");
-        jButton9.addActionListener(this::jButton9ActionPerformed);
+        viraPaginaMenos.setText("Virar Pagina -");
+        viraPaginaMenos.addActionListener(this::viraPaginaMenosActionPerformed);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -288,12 +290,12 @@ import javax.swing.JOptionPane;
                                 .addComponent(consulta, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(botaoConsulta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jButton8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(viraPaginaMais, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
                     .addGap(117, 117, 117)
-                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(viraPaginaMenos, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(507, Short.MAX_VALUE)))
         );
         jPanel3Layout.setVerticalGroup(
@@ -309,12 +311,12 @@ import javax.swing.JOptionPane;
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46)
-                .addComponent(jButton8)
+                .addComponent(viraPaginaMais)
                 .addContainerGap(57, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                     .addContainerGap(500, Short.MAX_VALUE)
-                    .addComponent(jButton9)
+                    .addComponent(viraPaginaMenos)
                     .addGap(51, 51, 51)))
         );
 
@@ -345,16 +347,17 @@ import javax.swing.JOptionPane;
 
         jLabel11.setText("Informe o Titulo do Livro a ser Excluido");
 
-        jTextField6.addActionListener(this::jTextField6ActionPerformed);
+        consultaExclui.addActionListener(this::consultaExcluiActionPerformed);
 
-        jButton3.setText("Consultar");
+        botaoConsultaExclui.setText("Consultar");
+        botaoConsultaExclui.addActionListener(this::botaoConsultaExcluiActionPerformed);
 
-        jButton4.setText("Excluir");
-        jButton4.addActionListener(this::jButton4ActionPerformed);
+        excluir.setText("Excluir");
+        excluir.addActionListener(this::excluirActionPerformed);
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane2.setViewportView(jTextArea2);
+        telaMostraObj.setColumns(20);
+        telaMostraObj.setRows(5);
+        jScrollPane2.setViewportView(telaMostraObj);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -363,16 +366,16 @@ import javax.swing.JOptionPane;
             .addComponent(jPanel4_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(90, 90, 90)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel11)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(consultaExclui, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botaoConsultaExclui, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(excluir, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -382,9 +385,9 @@ import javax.swing.JOptionPane;
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(consultaExclui, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botaoConsultaExclui)
+                    .addComponent(excluir))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(31, Short.MAX_VALUE))
@@ -705,13 +708,13 @@ import javax.swing.JOptionPane;
         // TODO add your handling code here:
     }//GEN-LAST:event_consultaActionPerformed
 
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+    private void consultaExcluiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaExcluiActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
+    }//GEN-LAST:event_consultaExcluiActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_excluirActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
@@ -729,13 +732,18 @@ import javax.swing.JOptionPane;
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField10ActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
+    private void viraPaginaMaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viraPaginaMaisActionPerformed
+       
+        int proximaPagina = livroController.viraPaginaMais();
+        String virada ="Número Pagina Virada:" + proximaPagina;
+        resposta.setText(virada);        
+    }//GEN-LAST:event_viraPaginaMaisActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton9ActionPerformed
+    private void viraPaginaMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viraPaginaMenosActionPerformed
+        int deminuiPagina = livroController.viraPagianaMenos();
+        String virada ="Número Pagina Virada:" + deminuiPagina;
+        resposta.setText(virada);
+    }//GEN-LAST:event_viraPaginaMenosActionPerformed
 
     private void NumPagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NumPagActionPerformed
         // TODO add your handling code here:
@@ -754,8 +762,14 @@ import javax.swing.JOptionPane;
                 + "Autor: " + livro.getAutor() + "\n"
                 + "Editora: " + livro.getEditora() + "\n"
                 + "Número de páginas: " + livro.getNumPags();
+        if(auxi == 1){
+            telaMostraObj.setText(resultado);
+        }else
+        {
         resposta.setText(resultado);
+        }
     }
+    
     private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
         String strTitulo = titulo.getText();
         String strAutor = autor.getText();
@@ -777,14 +791,24 @@ import javax.swing.JOptionPane;
     }//GEN-LAST:event_salvarActionPerformed
 
     private void botaoConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConsultaActionPerformed
-
+auxi=0;
         String tituloBusca = consulta.getText();
-        livroController.buscaLivro(tituloBusca);
+        livroController.buscaLivro(tituloBusca,auxi);
 
+    
+       
     
 
 
     }//GEN-LAST:event_botaoConsultaActionPerformed
+
+    private void botaoConsultaExcluiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConsultaExcluiActionPerformed
+          auxi=1;
+  
+        
+        String tituloBusca = consultaExclui.getText();
+        livroController.buscaLivro(tituloBusca,auxi);
+    }//GEN-LAST:event_botaoConsultaExcluiActionPerformed
     public String getConsulta() {
         String texto = consulta.getText();
         return (texto == null) ? "" : texto.trim();
@@ -805,15 +829,14 @@ public static void main(String args[]) {
     private javax.swing.JTextField NumPag;
     private javax.swing.JTextField autor;
     private javax.swing.JButton botaoConsulta;
+    private javax.swing.JButton botaoConsultaExclui;
     private javax.swing.JTextField consulta;
+    private javax.swing.JTextField consultaExclui;
     private javax.swing.JTextField editora;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton excluir;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -854,16 +877,17 @@ public static void main(String args[]) {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextArea jTextArea3;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
     private javax.swing.JTextArea resposta;
     private javax.swing.JButton salvar;
+    private javax.swing.JTextArea telaMostraObj;
     private javax.swing.JTextField titulo;
+    private javax.swing.JButton viraPaginaMais;
+    private javax.swing.JButton viraPaginaMenos;
     // End of variables declaration//GEN-END:variables
 }

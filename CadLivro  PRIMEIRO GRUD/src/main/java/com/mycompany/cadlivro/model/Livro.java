@@ -4,7 +4,9 @@
  */
 package com.mycompany.cadlivro.model;
 
+import com.mycompany.cadlivro.controller.LivroController;
 import java.util.Objects;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,8 +17,8 @@ public class Livro {
     private String autor;
 private String editora;
 private int numPags;
-private int pagAtual = 0;
-
+private int pagAtual=0;
+private int pagina =0;
 public Livro(){}
 
     public Livro(String titulo, String autor, String editora, int numPags) {
@@ -66,9 +68,25 @@ public Livro(){}
         this.pagAtual = pagAtual;
     }
 
+
    
+   public int viraPaginaMais(){
+       if(pagina < getNumPags()){
+           pagina  +=1;
+       } else {
+           JOptionPane.showMessageDialog(null,"Livro Chegou a Ultima Página");
+       }
+       
+       return this.pagina;
+}
     
-    
-    
+  public int viraPaginaMenos(){
+      if(pagina <= 0){
+          JOptionPane.showMessageDialog(null,"Livro Chegou a Pagina 0");
+      }else{
+        pagina -=1;
+      }
+      return this.pagina;
+  }  
     
 }
