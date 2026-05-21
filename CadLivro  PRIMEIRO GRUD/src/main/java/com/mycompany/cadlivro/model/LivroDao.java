@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.postgresql.core.ConnectionFactory;
+
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -16,7 +18,7 @@ import java.sql.SQLException;
  *
  * @author charles
  */
-public class LivroDao {
+public class LivroDao{ 
 public void salvar(Livro livro) throws SQLException {
         String sql = "INSERT INTO livros (titulo,autor,editora,numPags) VALUES (?, ?, ?,?)";
         
@@ -47,6 +49,7 @@ public Livro buscarPorLivro(String titulo) throws SQLException {
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     Livro l = new Livro();
+                    l.setId(rs.getInt("id"));
                     l.setTitulo(rs.getString("titulo"));
                     l.setAutor(rs.getString("autor"));
                     l.setEditora(rs.getString("editora"));
@@ -62,4 +65,49 @@ public Livro buscarPorLivro(String titulo) throws SQLException {
         }
         return null; // Retorna null se nenhum livro for encontrado
     }
+
+
+ public void excluir(String titulo) throws SQLException {
+        String sql = "DELETE FROM livros WHERE UPPER(titulo) = UPPER(?)";
+        
+        try (Connection conn = Conexao.getConexao(); 
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setString(1, titulo);
+            int linhasAfetadas = stmt.executeUpdate();
+            
+            if (linhasAfetadas == 0) {
+                throw new SQLException("Nenhum veículo encontrado com o modelo: " + titulo);
+            }
+        }
+ }
+public void update(Livro livro) throws SQLException {
+        String sql = "UPDATE livros SET titulo = ?, autor = ?, editora = ?, numpags = ? WHERE id = ?";
+    
+
+        
+            // Cria a conexão com o banco
+            try (Connection conn = Conexao.getConexao();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            // Vincula os valores aos parâmetros da query (?)
+        stmt.setString(1, livro.getTitulo());
+        stmt.setString(2, livro.getAutor());
+        stmt.setString(3, livro.getEditora());
+        stmt.setInt(4, livro.getNumPags());
+stmt.setInt(5, livro.getId());
+            // Executa a atualização no banco de dados
+            stmt.executeUpdate();
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } 
+        
+    }
+
+
+
+
+
 }

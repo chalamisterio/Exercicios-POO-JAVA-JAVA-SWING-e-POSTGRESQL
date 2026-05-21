@@ -13,6 +13,15 @@ import javax.swing.JOptionPane;
  * @author charles
  */
 public class Livro {
+    private int id;
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
     private String titulo;
     private String autor;
 private String editora;
@@ -22,12 +31,16 @@ private int pagina =0;
 public Livro(){}
 
     public Livro(String titulo, String autor, String editora, int numPags) {
+    
     this.titulo = titulo;
     this.autor = autor;
     this.editora = editora; // agora está correto
     this.numPags = numPags;
 }
 
+  
+
+  
     public String getTitulo() {
         return titulo;
     }
