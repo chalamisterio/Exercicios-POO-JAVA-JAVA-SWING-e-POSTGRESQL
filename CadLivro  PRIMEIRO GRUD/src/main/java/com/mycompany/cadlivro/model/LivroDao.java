@@ -1,11 +1,13 @@
 package com.mycompany.cadlivro.model;
 
+
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.util.ArrayList;
+import java.util.List;
 import org.postgresql.core.ConnectionFactory;
 
 
@@ -106,7 +108,28 @@ stmt.setInt(5, livro.getId());
         
     }
 
+ public List<Object[]> consultarTabela() {
+        List<Object[]> dados = new ArrayList<>();
+        String sql = "SELECT * FROM livros"; // Altere para o nome da sua tabela
 
+        try (Connection conn = Conexao.getConexao();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            int colCount = rs.getMetaData().getColumnCount();
+
+            while (rs.next()) {
+                Object[] linha = new Object[colCount];
+                for (int i = 0; i < colCount; i++) {
+                    linha[i] = rs.getObject(i + 1);
+                }
+                dados.add(linha);
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro ao consultar o banco: " + e.getMessage());
+        }
+        return dados;
+    }
 
 
 

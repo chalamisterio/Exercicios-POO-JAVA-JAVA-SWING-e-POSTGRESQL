@@ -3,22 +3,29 @@ import com.mycompany.cadlivro.model.Livro;
 import com.mycompany.cadlivro.model.LivroDao;
 import com.mycompany.cadlivro.view.LivroView;// Verifique se é Wiew ou View
 import java.sql.SQLException;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 
 /**
  * @author charles
  */
 public class LivroController {
-    
+    private  JTable tabelaView;
     private static Livro LIVRO_ATUAL = null;
     
     private LivroView view;
     private LivroDao dao;
 
     public LivroController(LivroView view) {
-        this.view = view;
-        this.dao = new LivroDao();
+    this.view = view;
+    this.dao = new LivroDao();
+}
+
+    public void setTabelaView(JTable tabelaView) {
+        this.tabelaView = tabelaView;
     }
 
    
@@ -164,6 +171,31 @@ public boolean atualizarLivro(String titulo, String autor, String editora, int n
 
 
 }
+public void preencherTabela() {
+        // Obter os dados do Banco
+        if (tabelaView == null) {
+            System.out.println("Aviso: tabelaView não foi injetada no Controlador.");
+            return; 
+        }
+
+        // Obtém a lista genérica de matrizes de objetos do banco
+        List<Object[]> dados = dao.consultarTabela();
+
+        // Cabeçalhos que mapeiam exatamente o SELECT * (Id, Titulo, Autor, Editora, NumPags)
+        String[] colunas = {"ID", "Título", "Autor", "Editora", "Nº Páginas"}; 
+
+        // Cria o modelo da tabela utilizando as colunas definidas
+        DefaultTableModel model = new DefaultTableModel(colunas, 0);
+
+        // Adiciona as linhas brutas vindas do banco de dados direto no componente
+        for (Object[] linha : dados) {
+            model.addRow(linha);
+        }
+
+        // Aloca o modelo de dados populado para o JTable da tela
+        tabelaView.setModel(model);
+    }
+
 }
 
     

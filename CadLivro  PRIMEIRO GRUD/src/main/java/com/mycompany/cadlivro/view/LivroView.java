@@ -20,30 +20,32 @@ public class LivroView extends javax.swing.JFrame {
 
     // CORREÇÃO: Use o ti 
     private LivroController livroController;
-    
+
     public LivroView(LivroController livroController) throws HeadlessException {
         this.livroController = livroController;
     }
-    
+
     public LivroView(LivroController livroController, GraphicsConfiguration gc) {
         super(gc);
         this.livroController = livroController;
     }
-    
+
     public LivroView(LivroController livroController, String title) throws HeadlessException {
         super(title);
         this.livroController = livroController;
     }
-    
+
     public LivroView(LivroController livroController, String title, GraphicsConfiguration gc) {
         super(title, gc);
         this.livroController = livroController;
-        
+
     }
 
     public LivroView() {
         initComponents(); // inicializa todos os componentes da interface
         this.livroController = new LivroController(this); // conecta o controller à view
+        this.livroController.setTabelaView(tabelaLivros);
+
     }
     int auxi = 0;
 
@@ -112,9 +114,9 @@ public class LivroView extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jPanel6_1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        jButton7 = new javax.swing.JButton();
+        consultaLivros = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelaLivros = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -532,21 +534,22 @@ public class LivroView extends javax.swing.JFrame {
         jPanel6_1Layout.setHorizontalGroup(
             jPanel6_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6_1Layout.createSequentialGroup()
-                .addGap(226, 226, 226)
+                .addGap(302, 302, 302)
                 .addComponent(jLabel5)
-                .addContainerGap(395, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6_1Layout.setVerticalGroup(
             jPanel6_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6_1Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
+                .addGap(36, 36, 36)
                 .addComponent(jLabel5)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
-        jButton7.setText("Consultar  Livros");
+        consultaLivros.setText("Consultar  Livros");
+        consultaLivros.addActionListener(this::consultaLivrosActionPerformed);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaLivros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -576,7 +579,7 @@ public class LivroView extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane4.setViewportView(jTable1);
+        jScrollPane4.setViewportView(tabelaLivros);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -584,12 +587,12 @@ public class LivroView extends javax.swing.JFrame {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel6_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(27, Short.MAX_VALUE)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 746, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27))
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(322, 322, 322)
-                .addComponent(jButton7)
+                .addComponent(consultaLivros)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
@@ -597,7 +600,7 @@ public class LivroView extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addComponent(jPanel6_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
-                .addComponent(jButton7)
+                .addComponent(consultaLivros)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 50, Short.MAX_VALUE))
@@ -666,33 +669,33 @@ public class LivroView extends javax.swing.JFrame {
 
     private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
         CardLayout cl = (CardLayout) jPanel1.getLayout();
-        
+
         cl.show(jPanel1, "tela1");
 
     }//GEN-LAST:event_jMenu1MouseClicked
 
     private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
         CardLayout cl = (CardLayout) jPanel1.getLayout();
-        
+
         cl.show(jPanel1, "tela2");
 
     }//GEN-LAST:event_jMenu2MouseClicked
 
     private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
         CardLayout cl = (CardLayout) jPanel1.getLayout();
-        
+
         cl.show(jPanel1, "tela3");
     }//GEN-LAST:event_jMenu3MouseClicked
 
     private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
         CardLayout cl = (CardLayout) jPanel1.getLayout();
-        
+
         cl.show(jPanel1, "tela4");
     }//GEN-LAST:event_jMenu4MouseClicked
 
     private void jMenu5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MouseClicked
         CardLayout cl = (CardLayout) jPanel1.getLayout();
-        
+
         cl.show(jPanel1, "tela5");
     }//GEN-LAST:event_jMenu5MouseClicked
 
@@ -718,13 +721,14 @@ public class LivroView extends javax.swing.JFrame {
     }//GEN-LAST:event_excluirActionPerformed
 
     private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
-       
-      String titulo  = tituloAtualiza.getText();
-      String autor = autorAtualiza.getText();
-       String editora = editoraAtualiza.getText();
+        auxi = 3;
+        String titulo = tituloAtualiza.getText();
+        String autor = autorAtualiza.getText();
+        String editora = editoraAtualiza.getText();
         int numPags = Integer.parseInt(numPagsAtualiza.getText());
-        
-        livroController.atualizarLivro(titulo, autor, editora,numPags);
+
+        livroController.atualizarLivro(titulo, autor, editora, numPags);
+        livroController.buscaLivro(titulo, auxi);
     }//GEN-LAST:event_updateActionPerformed
 
     private void consultaUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaUpdateActionPerformed
@@ -740,10 +744,10 @@ public class LivroView extends javax.swing.JFrame {
     }//GEN-LAST:event_editoraAtualizaActionPerformed
 
     private void viraPaginaMaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viraPaginaMaisActionPerformed
-        
+
         int proximaPagina = livroController.viraPaginaMais();
         String virada = "Número Pagina Virada:" + proximaPagina;
-        resposta.setText(virada);        
+        resposta.setText(virada);
     }//GEN-LAST:event_viraPaginaMaisActionPerformed
 
     private void viraPaginaMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viraPaginaMenosActionPerformed
@@ -755,46 +759,48 @@ public class LivroView extends javax.swing.JFrame {
     private void NumPagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NumPagActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_NumPagActionPerformed
-        public void limparExcluido() {
-            telaMostraObj.setText("");
-            consultaExclui.setText("");
-        }
+    public void limparExcluido() {
+        telaMostraObj.setText("");
+        consultaExclui.setText("");
+    }
 
-        public void limparTela() {
-            titulo.setText("");
-            autor.setText("");
-            editora.setText("");
-            NumPag.setText("");
-            resposta.setText("");
-        }
-        
-        public void limparTelaUpdate() {
-            consultaUpdate.setText("");
-            tituloAtualiza.setText("");
-            autorAtualiza.setText("");
-            editoraAtualiza.setText("");
-            numPagsAtualiza.setText("");
-            resultadoAtualizado.setText("");
-        }        
+    public void limparTela() {
+        titulo.setText("");
+        autor.setText("");
+        editora.setText("");
+        NumPag.setText("");
+        resposta.setText("");
+    }
 
-        public void mostrarResultados(Livro livro, int auxi) {
-            String resultado = "Título: " + livro.getTitulo() + "\n"
-                    + "Autor: " + livro.getAutor() + "\n"
-                    + "Editora: " + livro.getEditora() + "\n"
-                    + "Número de páginas: " + livro.getNumPags();
-            if (auxi == 1) {
-                telaMostraObj.setText(resultado);
-            } else if (auxi == 0) {
-                resposta.setText(resultado);
-            } else if (auxi == 2) {
-                resultadoAtualizado.setText(resultado);
-                tituloAtualiza.setText(livro.getTitulo());
-                autorAtualiza.setText(livro.getAutor());
-                editoraAtualiza.setText(livro.getEditora());
-                numPagsAtualiza.setText(String.valueOf(livro.getNumPags()));
-            }
+    public void limparTelaUpdate() {
+        consultaUpdate.setText("");
+        tituloAtualiza.setText("");
+        autorAtualiza.setText("");
+        editoraAtualiza.setText("");
+        numPagsAtualiza.setText("");
+        resultadoAtualizado.setText("");
+    }
+
+    public void mostrarResultados(Livro livro, int auxi) {
+        String resultado = "Título: " + livro.getTitulo() + "\n"
+                + "Autor: " + livro.getAutor() + "\n"
+                + "Editora: " + livro.getEditora() + "\n"
+                + "Número de páginas: " + livro.getNumPags();
+        if (auxi == 1) {
+            telaMostraObj.setText(resultado);
+        } else if (auxi == 0) {
+            resposta.setText(resultado);
+        } else if (auxi == 2) {
+            resultadoAtualizado.setText(resultado);
+            tituloAtualiza.setText(livro.getTitulo());
+            autorAtualiza.setText(livro.getAutor());
+            editoraAtualiza.setText(livro.getEditora());
+            numPagsAtualiza.setText(String.valueOf(livro.getNumPags()));
+        } else if (auxi == 3) {
+            resultadoAtualizado.setText(resultado);
         }
-        
+    }
+
     private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
         String strTitulo = titulo.getText();
         String strAutor = autor.getText();
@@ -806,10 +812,10 @@ public class LivroView extends javax.swing.JFrame {
             // Exemplo de chamada para o seu Controller
             boolean sucesso1;
             sucesso1 = livroController.LivroCadastro(strTitulo, strAutor, strEditora, intPaginas);
-            
+
             if (sucesso1) {
                 JOptionPane.showMessageDialog(null, "Livro salvo com sucesso!");
-                
+
             }
         }
 
@@ -819,13 +825,13 @@ public class LivroView extends javax.swing.JFrame {
         auxi = 0;
         String tituloBusca = consulta.getText();
         livroController.buscaLivro(tituloBusca, auxi);
-        
+
 
     }//GEN-LAST:event_botaoConsultaActionPerformed
 
     private void botaoConsultaExcluiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConsultaExcluiActionPerformed
         auxi = 1;
-        
+
         String tituloBusca = consultaExclui.getText();
         livroController.buscaLivro(tituloBusca, auxi);
     }//GEN-LAST:event_botaoConsultaExcluiActionPerformed
@@ -835,24 +841,36 @@ public class LivroView extends javax.swing.JFrame {
     }//GEN-LAST:event_numPagsAtualizaActionPerformed
 
     private void consultaAtualizaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaAtualizaActionPerformed
-        auxi = 2;        
+        auxi = 2;
         String tituloBusca = consultaUpdate.getText();
         livroController.buscaLivro(tituloBusca, auxi);
     }//GEN-LAST:event_consultaAtualizaActionPerformed
-        public String getConsulta() {
-            String texto = consulta.getText();
-            return (texto == null) ? "" : texto.trim();
+
+    private void consultaLivrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaLivrosActionPerformed
+
+        if (livroController != null) {
+            livroController.preencherTabela();
+
         }
-        
-        public void setResposta(String texto) {
-            resposta.setText(texto);
-            
-        }
-        
-        public static void main(String args[]) {
-            java.awt.EventQueue.invokeLater(() -> new LivroView().setVisible(true));
-            
-        }
+
+    }//GEN-LAST:event_consultaLivrosActionPerformed
+    public String getConsulta() {
+        String texto = consulta.getText();
+        return (texto == null) ? "" : texto.trim();
+    }
+
+    public void setResposta(String texto) {
+        resposta.setText(texto);
+
+    }
+
+    public static void main(String args[]) {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new LivroView().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField NumPag;
@@ -863,11 +881,11 @@ public class LivroView extends javax.swing.JFrame {
     private javax.swing.JTextField consulta;
     private javax.swing.JButton consultaAtualiza;
     private javax.swing.JTextField consultaExclui;
+    private javax.swing.JButton consultaLivros;
     private javax.swing.JTextField consultaUpdate;
     private javax.swing.JTextField editora;
     private javax.swing.JTextField editoraAtualiza;
     private javax.swing.JButton excluir;
-    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -907,11 +925,11 @@ public class LivroView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField numPagsAtualiza;
     private javax.swing.JTextArea resposta;
     private javax.swing.JTextArea resultadoAtualizado;
     private javax.swing.JButton salvar;
+    private javax.swing.JTable tabelaLivros;
     private javax.swing.JTextArea telaMostraObj;
     private javax.swing.JTextField titulo;
     private javax.swing.JTextField tituloAtualiza;
