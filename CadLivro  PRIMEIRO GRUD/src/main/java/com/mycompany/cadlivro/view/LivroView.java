@@ -15,6 +15,7 @@ import java.awt.GraphicsConfiguration;
 import java.awt.HeadlessException;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class LivroView extends javax.swing.JFrame {
 
@@ -45,6 +46,20 @@ public class LivroView extends javax.swing.JFrame {
         initComponents(); // inicializa todos os componentes da interface
         this.livroController = new LivroController(this); // conecta o controller à view
         this.livroController.setTabelaView(tabelaLivros);
+        // Força os componentes a aceitarem e renderizarem HTML perfeitamente
+    resposta.setContentType("text/html");
+    telaMostraObj.setContentType("text/html");
+    resultadoAtualizado.setContentType("text/html");
+
+    // Mantém o fundo branco padrão de relatório para os três campos
+    resposta.setBackground(java.awt.Color.WHITE);
+    telaMostraObj.setBackground(java.awt.Color.WHITE);
+    resultadoAtualizado.setBackground(java.awt.Color.WHITE);
+
+    // -----------------------------------------------------------
+
+    this.livroController = new LivroController(this); // Conecta o controller à view
+    this.livroController.setTabelaView(tabelaLivros);
 
     }
     int auxi = 0;
@@ -79,11 +94,11 @@ public class LivroView extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         consulta = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        resposta = new javax.swing.JTextArea();
         botaoConsulta = new javax.swing.JButton();
         viraPaginaMais = new javax.swing.JButton();
         viraPaginaMenos = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        resposta = new javax.swing.JTextPane();
         jPanel4 = new javax.swing.JPanel();
         jPanel4_1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -91,17 +106,14 @@ public class LivroView extends javax.swing.JFrame {
         consultaExclui = new javax.swing.JTextField();
         botaoConsultaExclui = new javax.swing.JButton();
         excluir = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        telaMostraObj = new javax.swing.JTextArea();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        telaMostraObj = new javax.swing.JTextPane();
         jPanel5 = new javax.swing.JPanel();
         jPanel5_1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         consultaUpdate = new javax.swing.JTextField();
         consultaAtualiza = new javax.swing.JButton();
-        update = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        resultadoAtualizado = new javax.swing.JTextArea();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         tituloAtualiza = new javax.swing.JTextField();
@@ -111,19 +123,25 @@ public class LivroView extends javax.swing.JFrame {
         editoraAtualiza = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         numPagsAtualiza = new javax.swing.JTextField();
+        update1 = new javax.swing.JButton();
+        update2 = new javax.swing.JButton();
+        LimparObjeto = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        resultadoAtualizado = new javax.swing.JTextPane();
         jPanel6 = new javax.swing.JPanel();
         jPanel6_1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         consultaLivros = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         tabelaLivros = new javax.swing.JTable();
+        limparTabela = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
-        jMenu6 = new javax.swing.JMenu();
+        Sair = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -135,40 +153,65 @@ public class LivroView extends javax.swing.JFrame {
 
         jPanel2_1.setBackground(new java.awt.Color(153, 255, 153));
 
+        jLabel1.setBackground(new java.awt.Color(204, 204, 204));
+        jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Tela Cadastro Livro");
+        jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         javax.swing.GroupLayout jPanel2_1Layout = new javax.swing.GroupLayout(jPanel2_1);
         jPanel2_1.setLayout(jPanel2_1Layout);
         jPanel2_1Layout.setHorizontalGroup(
             jPanel2_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2_1Layout.createSequentialGroup()
-                .addGap(324, 324, 324)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2_1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addContainerGap(349, Short.MAX_VALUE))
+                .addGap(273, 273, 273))
         );
         jPanel2_1Layout.setVerticalGroup(
             jPanel2_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2_1Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
+                .addGap(37, 37, 37)
                 .addComponent(jLabel1)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
+        editora.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         editora.addActionListener(this::editoraActionPerformed);
 
+        titulo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel6.setBackground(new java.awt.Color(204, 204, 204));
+        jLabel6.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        jLabel6.setForeground(java.awt.SystemColor.controlLtHighlight);
         jLabel6.setText("Titulo");
 
+        jLabel7.setBackground(new java.awt.Color(204, 204, 204));
+        jLabel7.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Autor");
 
+        autor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         autor.addActionListener(this::autorActionPerformed);
 
+        jLabel8.setBackground(new java.awt.Color(204, 204, 204));
+        jLabel8.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Editora");
 
+        NumPag.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         NumPag.addActionListener(this::NumPagActionPerformed);
 
+        jLabel9.setBackground(new java.awt.Color(204, 204, 204));
+        jLabel9.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Número de Paginas");
 
+        salvar.setBackground(new java.awt.Color(153, 153, 153));
+        salvar.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        salvar.setForeground(new java.awt.Color(255, 255, 255));
         salvar.setText("Salvar");
+        salvar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         salvar.addActionListener(this::salvarActionPerformed);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -183,7 +226,7 @@ public class LivroView extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(autor, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -198,11 +241,11 @@ public class LivroView extends javax.swing.JFrame {
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel9)
-                        .addGap(213, 213, 213))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(salvar)
-                .addGap(362, 362, 362))
+                        .addGap(171, 171, 171))))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(353, 353, 353)
+                .addComponent(salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,17 +259,20 @@ public class LivroView extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(autor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(58, 58, 58)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addComponent(jLabel8))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel9)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(editora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(NumPag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
                 .addComponent(salvar)
-                .addGap(103, 103, 103))
+                .addGap(106, 106, 106))
         );
 
         jPanel1.add(jPanel2, "tela1");
@@ -235,41 +281,55 @@ public class LivroView extends javax.swing.JFrame {
 
         jPanel3_1.setBackground(new java.awt.Color(153, 255, 153));
 
+        jLabel2.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Consulta Livro");
+        jLabel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         javax.swing.GroupLayout jPanel3_1Layout = new javax.swing.GroupLayout(jPanel3_1);
         jPanel3_1.setLayout(jPanel3_1Layout);
         jPanel3_1Layout.setHorizontalGroup(
             jPanel3_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3_1Layout.createSequentialGroup()
-                .addGap(323, 323, 323)
+                .addGap(314, 314, 314)
                 .addComponent(jLabel2)
-                .addContainerGap(384, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3_1Layout.setVerticalGroup(
             jPanel3_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3_1Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(36, 36, 36)
                 .addComponent(jLabel2)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
+        jLabel10.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Digite o Titolodo Livro a ser Concultado");
 
+        consulta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         consulta.addActionListener(this::consultaActionPerformed);
 
-        resposta.setColumns(20);
-        resposta.setRows(5);
-        jScrollPane1.setViewportView(resposta);
-
+        botaoConsulta.setBackground(new java.awt.Color(153, 153, 153));
+        botaoConsulta.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        botaoConsulta.setForeground(new java.awt.Color(255, 255, 255));
         botaoConsulta.setText("Consultar");
         botaoConsulta.addActionListener(this::botaoConsultaActionPerformed);
 
+        viraPaginaMais.setBackground(new java.awt.Color(204, 204, 204));
+        viraPaginaMais.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        viraPaginaMais.setForeground(new java.awt.Color(255, 255, 255));
         viraPaginaMais.setText("Virar Pagina +");
         viraPaginaMais.addActionListener(this::viraPaginaMaisActionPerformed);
 
+        viraPaginaMenos.setBackground(new java.awt.Color(204, 204, 204));
+        viraPaginaMenos.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        viraPaginaMenos.setForeground(new java.awt.Color(255, 255, 255));
         viraPaginaMenos.setText("Virar Pagina -");
         viraPaginaMenos.addActionListener(this::viraPaginaMenosActionPerformed);
+
+        resposta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jScrollPane1.setViewportView(resposta);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -279,44 +339,41 @@ public class LivroView extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(185, 185, 185)
-                        .addComponent(jLabel10))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(107, 107, 107)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 583, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(consulta, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(botaoConsulta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(viraPaginaMais, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addGap(117, 117, 117)
-                    .addComponent(viraPaginaMenos, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(507, Short.MAX_VALUE)))
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addComponent(viraPaginaMenos, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(viraPaginaMais, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addComponent(consulta, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(botaoConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(118, 118, 118)
+                        .addComponent(jLabel10)))
+                .addContainerGap(110, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jPanel3_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel10)
-                .addGap(24, 24, 24)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(consulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botaoConsulta))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46)
-                .addComponent(viraPaginaMais)
-                .addContainerGap(57, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                    .addContainerGap(500, Short.MAX_VALUE)
-                    .addComponent(viraPaginaMenos)
-                    .addGap(51, 51, 51)))
+                .addComponent(jLabel10)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(botaoConsulta)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(consulta, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(viraPaginaMais)
+                    .addComponent(viraPaginaMenos))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel3, "tela2");
@@ -325,38 +382,49 @@ public class LivroView extends javax.swing.JFrame {
 
         jPanel4_1.setBackground(new java.awt.Color(153, 255, 153));
 
+        jLabel3.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Excluir Livro");
+        jLabel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         javax.swing.GroupLayout jPanel4_1Layout = new javax.swing.GroupLayout(jPanel4_1);
         jPanel4_1.setLayout(jPanel4_1Layout);
         jPanel4_1Layout.setHorizontalGroup(
             jPanel4_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4_1Layout.createSequentialGroup()
-                .addGap(314, 314, 314)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4_1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
-                .addContainerGap(407, Short.MAX_VALUE))
+                .addGap(337, 337, 337))
         );
         jPanel4_1Layout.setVerticalGroup(
             jPanel4_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4_1Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4_1Layout.createSequentialGroup()
+                .addContainerGap(42, Short.MAX_VALUE)
                 .addComponent(jLabel3)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addGap(40, 40, 40))
         );
 
+        jLabel11.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Informe o Titulo do Livro a ser Excluido");
 
+        consultaExclui.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         consultaExclui.addActionListener(this::consultaExcluiActionPerformed);
 
+        botaoConsultaExclui.setBackground(new java.awt.Color(204, 204, 204));
+        botaoConsultaExclui.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        botaoConsultaExclui.setForeground(new java.awt.Color(255, 255, 255));
         botaoConsultaExclui.setText("Consultar");
         botaoConsultaExclui.addActionListener(this::botaoConsultaExcluiActionPerformed);
 
+        excluir.setBackground(new java.awt.Color(204, 204, 204));
+        excluir.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        excluir.setForeground(new java.awt.Color(255, 255, 255));
         excluir.setText("Excluir");
         excluir.addActionListener(this::excluirActionPerformed);
 
-        telaMostraObj.setColumns(20);
-        telaMostraObj.setRows(5);
-        jScrollPane2.setViewportView(telaMostraObj);
+        telaMostraObj.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jScrollPane5.setViewportView(telaMostraObj);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -365,7 +433,7 @@ public class LivroView extends javax.swing.JFrame {
             .addComponent(jPanel4_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(90, 90, 90)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel11)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(consultaExclui, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -373,7 +441,7 @@ public class LivroView extends javax.swing.JFrame {
                         .addComponent(botaoConsultaExclui, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(excluir, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane5))
                 .addContainerGap(84, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -387,9 +455,9 @@ public class LivroView extends javax.swing.JFrame {
                     .addComponent(consultaExclui, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botaoConsultaExclui)
                     .addComponent(excluir))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel4, "tela3");
@@ -399,54 +467,90 @@ public class LivroView extends javax.swing.JFrame {
 
         jPanel5_1.setBackground(new java.awt.Color(153, 255, 153));
 
+        jLabel4.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Alterar Livros");
+        jLabel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         javax.swing.GroupLayout jPanel5_1Layout = new javax.swing.GroupLayout(jPanel5_1);
         jPanel5_1.setLayout(jPanel5_1Layout);
         jPanel5_1Layout.setHorizontalGroup(
             jPanel5_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5_1Layout.createSequentialGroup()
-                .addGap(289, 289, 289)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5_1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
-                .addContainerGap(426, Short.MAX_VALUE))
+                .addGap(332, 332, 332))
         );
         jPanel5_1Layout.setVerticalGroup(
             jPanel5_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5_1Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(38, 38, 38)
                 .addComponent(jLabel4)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
+        jLabel12.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Informe o Titulo do Livro a ser Alterado");
 
+        consultaUpdate.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         consultaUpdate.addActionListener(this::consultaUpdateActionPerformed);
 
+        consultaAtualiza.setBackground(new java.awt.Color(204, 204, 204));
+        consultaAtualiza.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        consultaAtualiza.setForeground(new java.awt.Color(255, 255, 255));
         consultaAtualiza.setText("Consultar");
         consultaAtualiza.addActionListener(this::consultaAtualizaActionPerformed);
 
-        update.setText("Atualizar");
-        update.addActionListener(this::updateActionPerformed);
-
-        resultadoAtualizado.setColumns(20);
-        resultadoAtualizado.setRows(5);
-        jScrollPane3.setViewportView(resultadoAtualizado);
-
+        jLabel13.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Titulo");
 
+        jLabel14.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Informe os Campos que Irão ser alterados");
 
+        tituloAtualiza.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         tituloAtualiza.addActionListener(this::tituloAtualizaActionPerformed);
 
+        jLabel15.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("Autor");
 
+        autorAtualiza.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel16.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setText("Editora");
 
+        editoraAtualiza.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        editoraAtualiza.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         editoraAtualiza.addActionListener(this::editoraAtualizaActionPerformed);
 
+        jLabel17.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setText("Número de Paginas");
 
+        numPagsAtualiza.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         numPagsAtualiza.addActionListener(this::numPagsAtualizaActionPerformed);
+
+        update1.setText("Limpar");
+        update1.addActionListener(this::update1ActionPerformed);
+
+        update2.setBackground(new java.awt.Color(204, 204, 204));
+        update2.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        update2.setForeground(new java.awt.Color(255, 255, 255));
+        update2.setText("Atualizar");
+        update2.addActionListener(this::update2ActionPerformed);
+
+        LimparObjeto.setBackground(new java.awt.Color(204, 204, 204));
+        LimparObjeto.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        LimparObjeto.setForeground(new java.awt.Color(255, 255, 255));
+        LimparObjeto.setText("Limpar");
+        LimparObjeto.addActionListener(this::LimparObjetoActionPerformed);
+
+        resultadoAtualizado.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jScrollPane2.setViewportView(resultadoAtualizado);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -454,70 +558,72 @@ public class LivroView extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel5_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(75, 75, 75)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGap(64, 64, 64)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(consultaUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(consultaUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(consultaAtualiza, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(update, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addComponent(consultaAtualiza)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(update2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(36, 36, 36)
+                                .addComponent(LimparObjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(tituloAtualiza)
-                            .addComponent(autorAtualiza)
-                            .addComponent(editoraAtualiza)
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel13)
-                                    .addComponent(jLabel15)
                                     .addComponent(jLabel16)
-                                    .addComponent(jLabel17))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(numPagsAtualiza)))
+                                    .addComponent(jLabel17)
+                                    .addComponent(numPagsAtualiza, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(editoraAtualiza, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(autorAtualiza, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel15))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap(73, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(205, 205, 205)
-                        .addComponent(jLabel14))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(98, 98, 98)
-                        .addComponent(jLabel12)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel14)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addComponent(jPanel5_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(40, 40, 40)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(consultaUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(consultaAtualiza)
-                    .addComponent(update))
+                    .addComponent(update2)
+                    .addComponent(LimparObjeto)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(4, 4, 4)
+                .addComponent(consultaUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel14)
-                .addGap(36, 36, 36)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tituloAtualiza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
+                        .addComponent(tituloAtualiza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24)
                         .addComponent(jLabel15)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(autorAtualiza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel16)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(editoraAtualiza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel17)
                         .addGap(18, 18, 18)
-                        .addComponent(numPagsAtualiza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 91, Short.MAX_VALUE))
+                        .addComponent(numPagsAtualiza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2))
+                .addGap(42, 42, 42))
         );
 
         jPanel1.add(jPanel5, "tela4");
@@ -527,7 +633,10 @@ public class LivroView extends javax.swing.JFrame {
 
         jPanel6_1.setBackground(new java.awt.Color(153, 255, 153));
 
+        jLabel5.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Consulatar Todos os Livros");
+        jLabel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         javax.swing.GroupLayout jPanel6_1Layout = new javax.swing.GroupLayout(jPanel6_1);
         jPanel6_1.setLayout(jPanel6_1Layout);
@@ -546,9 +655,14 @@ public class LivroView extends javax.swing.JFrame {
                 .addContainerGap(46, Short.MAX_VALUE))
         );
 
+        consultaLivros.setBackground(new java.awt.Color(204, 204, 204));
+        consultaLivros.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        consultaLivros.setForeground(new java.awt.Color(255, 255, 255));
         consultaLivros.setText("Consultar  Livros");
         consultaLivros.addActionListener(this::consultaLivrosActionPerformed);
 
+        tabelaLivros.setBackground(new java.awt.Color(204, 204, 204));
+        tabelaLivros.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         tabelaLivros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -581,32 +695,45 @@ public class LivroView extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(tabelaLivros);
 
+        limparTabela.setBackground(new java.awt.Color(204, 204, 204));
+        limparTabela.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        limparTabela.setForeground(new java.awt.Color(255, 255, 255));
+        limparTabela.setText("Limpar Tabela");
+        limparTabela.addActionListener(this::limparTabelaActionPerformed);
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel6_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 746, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27))
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(322, 322, 322)
-                .addComponent(consultaLivros)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(252, 252, 252)
+                        .addComponent(consultaLivros)
+                        .addGap(18, 18, 18)
+                        .addComponent(limparTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 746, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addComponent(jPanel6_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
-                .addComponent(consultaLivros)
-                .addGap(18, 18, 18)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(consultaLivros)
+                    .addComponent(limparTabela))
+                .addGap(30, 30, 30)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 50, Short.MAX_VALUE))
+                .addGap(0, 9, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel6, "tela5");
+
+        jMenuBar1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jMenu1.setText("Cadastrar Livro");
         jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -648,8 +775,14 @@ public class LivroView extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenu5);
 
-        jMenu6.setText("Sair");
-        jMenuBar1.add(jMenu6);
+        Sair.setText("Sair");
+        Sair.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SairMouseClicked(evt);
+            }
+        });
+        Sair.addActionListener(this::SairActionPerformed);
+        jMenuBar1.add(Sair);
 
         setJMenuBar(jMenuBar1);
 
@@ -661,7 +794,7 @@ public class LivroView extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 575, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 574, Short.MAX_VALUE)
         );
 
         pack();
@@ -720,17 +853,6 @@ public class LivroView extends javax.swing.JFrame {
         livroController.excluirLivro(LivroExcluido);
     }//GEN-LAST:event_excluirActionPerformed
 
-    private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
-        auxi = 3;
-        String titulo = tituloAtualiza.getText();
-        String autor = autorAtualiza.getText();
-        String editora = editoraAtualiza.getText();
-        int numPags = Integer.parseInt(numPagsAtualiza.getText());
-
-        livroController.atualizarLivro(titulo, autor, editora, numPags);
-        livroController.buscaLivro(titulo, auxi);
-    }//GEN-LAST:event_updateActionPerformed
-
     private void consultaUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaUpdateActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_consultaUpdateActionPerformed
@@ -745,15 +867,44 @@ public class LivroView extends javax.swing.JFrame {
 
     private void viraPaginaMaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viraPaginaMaisActionPerformed
 
+        //int proximaPagina = livroController.viraPaginaMais();
+        //String virada = "Número Pagina Virada:" + proximaPagina;
+        //resposta.setText(virada);
+        
+        
+        
         int proximaPagina = livroController.viraPaginaMais();
-        String virada = "Número Pagina Virada:" + proximaPagina;
-        resposta.setText(virada);
+    
+    // Criando uma estrutura HTML com CSS inline para um visual profissional
+    String virada = "<html>"
+                  + "<body style='text-align: center; font-family: sans-serif; background-color: #f4f4f4; padding: 10px;'>"
+                  + "  <div style='font-size: 11px; color: #7f8c8d; text-transform: uppercase; letter-spacing: 1px;'>Página Atual</div>"
+                  + "  <div style='font-size: 24px; font-weight: bold; color: #2c3e50; margin-top: 5px;'>" + proximaPagina + "</div>"
+                  + "</body>"
+                  + "</html>";
+    
+    // Garante que o componente aceita HTML e define o texto
+    resposta.setContentType("text/html");
+    resposta.setText(virada);
     }//GEN-LAST:event_viraPaginaMaisActionPerformed
 
     private void viraPaginaMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viraPaginaMenosActionPerformed
         int deminuiPagina = livroController.viraPagianaMenos();
-        String virada = "Número Pagina Virada:" + deminuiPagina;
-        resposta.setText(virada);
+        //String virada = "Número Pagina Virada:" + deminuiPagina;
+        //resposta.setText(virada);
+        
+        String virada = "<html>"
+                  + "<body style='text-align: center; font-family: sans-serif; background-color: #f4f4f4; padding: 10px;'>"
+                  + "  <div style='font-size: 11px; color: #7f8c8d; text-transform: uppercase; letter-spacing: 1px;'>Página Atual</div>"
+                  + "  <div style='font-size: 24px; font-weight: bold; color: #2c3e50; margin-top: 5px;'>" + deminuiPagina + "</div>"
+                  + "</body>"
+                  + "</html>";
+    
+    // Garante que o componente aceita HTML e define o texto
+    resposta.setContentType("text/html");
+    resposta.setText(virada);
+        
+        
     }//GEN-LAST:event_viraPaginaMenosActionPerformed
 
     private void NumPagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NumPagActionPerformed
@@ -763,7 +914,11 @@ public class LivroView extends javax.swing.JFrame {
         telaMostraObj.setText("");
         consultaExclui.setText("");
     }
-
+public void limparTabela(){
+    
+}
+    
+    
     public void limparTela() {
         titulo.setText("");
         autor.setText("");
@@ -782,10 +937,59 @@ public class LivroView extends javax.swing.JFrame {
     }
 
     public void mostrarResultados(Livro livro, int auxi) {
-        String resultado = "Título: " + livro.getTitulo() + "\n"
-                + "Autor: " + livro.getAutor() + "\n"
-                + "Editora: " + livro.getEditora() + "\n"
-                + "Número de páginas: " + livro.getNumPags();
+        //String resultado = "Título: " + livro.getTitulo() + "\n"
+          //      + "Autor: " + livro.getAutor() + "\n"
+            //    + "Editora: " + livro.getEditora() + "\n"
+              //  + "Número de páginas: " + livro.getNumPags();
+              
+              StringBuilder html = new StringBuilder();
+    html.append("<html>");
+    html.append("<body style='font-family: sans-serif; background-color: #ffffff; margin: 0; padding: 12px;'>");
+    
+    // Cabeçalho do Relatório
+    html.append("  <div style='text-align: center; border-bottom: 2px solid #e1e8ed; padding-bottom: 6px; margin-bottom: 12px;'>");
+    html.append("    <h3 style='color: #1a2a3a; margin: 0; font-size: 15px; text-transform: uppercase; letter-spacing: 1px;'>Relatório Técnico do Livro</h3>");
+    html.append("  </div>");
+    
+    // Tabela de Dados
+    html.append("  <table style='width: 100%; border-collapse: collapse;'>");
+    
+    // Linha: Título
+    html.append("    <tr>");
+    html.append("      <td style='padding: 8px 4px; font-weight: bold; color: #708090; border-bottom: 1px solid #f0f2f5; font-size: 12px; width: 35%;'>TÍTULO</td>");
+    html.append("      <td style='padding: 8px 4px; color: #2c3e50; border-bottom: 1px solid #f0f2f5; font-size: 13px;'>").append(livro.getTitulo()).append("</td>");
+    html.append("    </tr>");
+    
+    // Linha: Autor
+    html.append("    <tr>");
+    html.append("      <td style='padding: 8px 4px; font-weight: bold; color: #708090; border-bottom: 1px solid #f0f2f5; font-size: 12px;'>AUTOR</td>");
+    html.append("      <td style='padding: 8px 4px; color: #2c3e50; border-bottom: 1px solid #f0f2f5; font-size: 13px;'>").append(livro.getAutor()).append("</td>");
+    html.append("    </tr>");
+    
+    // Linha: Editora
+    html.append("    <tr>");
+    html.append("      <td style='padding: 8px 4px; font-weight: bold; color: #708090; border-bottom: 1px solid #f0f2f5; font-size: 12px;'>EDITORA</td>");
+    html.append("      <td style='padding: 8px 4px; color: #2c3e50; border-bottom: 1px solid #f0f2f5; font-size: 13px;'>").append(livro.getEditora()).append("</td>");
+    html.append("    </tr>");
+    
+    // Linha: Páginas
+    html.append("    <tr>");
+    html.append("      <td style='padding: 8px 4px; font-weight: bold; color: #708090; border-bottom: 1px solid #f0f2f5; font-size: 12px;'>Nº DE PÁGINAS</td>");
+    html.append("      <td style='padding: 8px 4px; color: #2c3e50; border-bottom: 1px solid #f0f2f5; font-size: 13px;'>").append(livro.getNumPags()).append(" páginas</td>");
+    html.append("    </tr>");
+    
+    html.append("  </table>");
+    html.append("</body>");
+    html.append("</html>");
+
+    String resultado = html.toString();
+              
+              
+              
+              
+              
+              
+              
         if (auxi == 1) {
             telaMostraObj.setText(resultado);
         } else if (auxi == 0) {
@@ -854,6 +1058,51 @@ public class LivroView extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_consultaLivrosActionPerformed
+
+    private void limparTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparTabelaActionPerformed
+        DefaultTableModel modelo = (DefaultTableModel) tabelaLivros.getModel();
+while (modelo.getRowCount() > 0) {
+    modelo.removeRow(0);
+}
+    }//GEN-LAST:event_limparTabelaActionPerformed
+
+    private void update1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_update1ActionPerformed
+
+    private void update2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update2ActionPerformed
+        
+       auxi = 3; 
+        
+        String titulo = tituloAtualiza.getText();
+        String autor = autorAtualiza.getText();
+        String editora = editoraAtualiza.getText();
+        int numPags = Integer.parseInt(numPagsAtualiza.getText());
+        livroController.atualizarLivro(titulo, autor, editora, numPags);
+        livroController.buscaLivro(titulo, auxi);
+        
+    }//GEN-LAST:event_update2ActionPerformed
+
+    private void LimparObjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimparObjetoActionPerformed
+resultadoAtualizado.setText("");
+tituloAtualiza.setText("");
+autorAtualiza.setText("");
+editoraAtualiza.setText("");
+numPagsAtualiza.setText("");
+consultaUpdate.setText("");
+    }//GEN-LAST:event_LimparObjetoActionPerformed
+
+    private void SairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SairActionPerformed
+        
+    }//GEN-LAST:event_SairActionPerformed
+
+    private void SairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SairMouseClicked
+        dispose();
+    }//GEN-LAST:event_SairMouseClicked
+    
+    
+    
+    
     public String getConsulta() {
         String texto = consulta.getText();
         return (texto == null) ? "" : texto.trim();
@@ -873,7 +1122,9 @@ public class LivroView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton LimparObjeto;
     private javax.swing.JTextField NumPag;
+    private javax.swing.JMenu Sair;
     private javax.swing.JTextField autor;
     private javax.swing.JTextField autorAtualiza;
     private javax.swing.JButton botaoConsulta;
@@ -908,7 +1159,6 @@ public class LivroView extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -923,17 +1173,19 @@ public class LivroView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6_1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JButton limparTabela;
     private javax.swing.JTextField numPagsAtualiza;
-    private javax.swing.JTextArea resposta;
-    private javax.swing.JTextArea resultadoAtualizado;
+    private javax.swing.JTextPane resposta;
+    private javax.swing.JTextPane resultadoAtualizado;
     private javax.swing.JButton salvar;
     private javax.swing.JTable tabelaLivros;
-    private javax.swing.JTextArea telaMostraObj;
+    private javax.swing.JTextPane telaMostraObj;
     private javax.swing.JTextField titulo;
     private javax.swing.JTextField tituloAtualiza;
-    private javax.swing.JButton update;
+    private javax.swing.JButton update1;
+    private javax.swing.JButton update2;
     private javax.swing.JButton viraPaginaMais;
     private javax.swing.JButton viraPaginaMenos;
     // End of variables declaration//GEN-END:variables
