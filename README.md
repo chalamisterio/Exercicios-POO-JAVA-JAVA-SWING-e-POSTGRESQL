@@ -1,47 +1,41 @@
-# Exercicios-POO-JAVA-JAVA-SWING-e-POSTGRESQL
-Exercicio Grud com JAVA POO, JAVA SWING E POSTGRES 
+📚 Exercícios POO - JAVA, JAVA SWING e POSTGRESQL
 
-Exercício 1. (CadLivro GRUD)
-Crie um programa que implemente a classe Livro. Esta classe deve conter o título
-do livro, nome do autor, editora e quantidade de páginas. Adicione um atributo que
-armazene a página atual (paginaAtual), para apresentação em um dispositivo eletrô-
-nico de leitura. Crie um método virarPagina, que incrementa o valor armazenado em
-paginaAtual. Após isso, crie uma segunda classe chamada Main (classe principal) que
-conterá o método main. Nesta classe, crie um objeto Livro e preencha seus atributos com
-valores lidos do usuário. Após isso, chame o método para virar uma página e apresente
-o objeto (seu estado) em tela. A classe Livro é apresentada abaixo.
-Livro
-– titulo: String
-– autor: String
-– editora: String
-– numPags: int
-– pagAtual: int = 0
-+ métodos construtores
-+ métodos set() e get()
-+ virarPagina(): void
-Exercício 2 (ListaLivros)
-Usando a classe Livro, criada no exercício anterior, crie uma lista para armazenar dife-
-rentes livros. Esta lista pode ser criada usando a coleção ArrayList. Crie um conjunto
-de objetos, solicite ao usuário o valor dos seus atributos e armazene-os na lista. Após
-isso, apresente o título e o número de páginas de cada livro armazenado. Utilize uma
-lista global e diferentes métodos para a criação dos objetos e sua apresentação.
-Exercício 2.3. (ConsultaLivro)
-Com base no exercício anterior, crie um método para a consulta de livros. O usuário
-informa o título do livro desejado, o sistema faz a busca na lista de livros e apresenta
-seus dados, caso o encontre. Caso contrário, o sistema deve apresentar a mensagem "Livro
-não encontrado".
-Exercício 2 (ExcluiLivro)
-Com base no exercício anterior, crie um método para exclusão de livros. O usuário
-informa o título do livro que deseja excluir, o sistema faz a busca do livro e o remove da
-lista, caso o encontre. Caso contrário, o sistema deve apresentar a mensagem "Livro não
-encontrado".
-Exercício 2 (AlteraLivro)
-Com base no exercício anterior, crie um método para alteração de livros. O usuário
-informa o título do livro que deseja alterar, o sistema faz a busca do livro e, caso o encon-
-tre, solicita as novas informações ao usuário, atualizando seus campos. Caso contrário. o
-sistema deve apresentar a mensagem "Livro não encontrado".
-Exercício 2.6. (LivrosCompleto)
-Com base nos métodos criados nos exercícios anteriores, crie um programa que apresente
-ao usuário um menu com todas as opções (cadastro de livro, alteração, exclusão, consulta
-por título, consulta completa e sair). O usuário pode selecionar as opções desejadas e, ao
-terminar, seleciona a opção sair, que finaliza a execução do programa.
+Este repositório foi criado para documentar e organizar a resolução do roteiro de exercícios de Programação Orientada a Objetos (POO) em Java. O projeto evolui de uma lógica simples de console para um sistema completo de gerenciamento de livros (GRUD/CRUD), utilizando interface gráfica profissional e persistência real em banco de dados.
+🛠️ Tecnologias e Conceitos Utilizados
+
+    Java SE (JDK): Linguagem base para a criação das classes, métodos estruturados e aplicação dos pilares de POO (Encapsulamento, Objetos e Métodos).
+
+    Java Swing (GUI): Biblioteca gráfica utilizada para criar as janelas do sistema. O gerenciamento de telas é controlado via CardLayout, permitindo alternar entre 5 painéis diferentes dentro de um único Frame central.
+
+    PostgreSQL: Banco de dados relacional robusto utilizado para substituir listas temporárias em memória (ArrayList), garantindo que os livros cadastrados permaneçam salvos mesmo após fechar o programa.
+
+    Padrão Arquitetural MVC: Divisão do projeto em camadas isoladas:
+
+        Model: Representação da entidade Livro e suas regras.
+
+        DAO (Data Access Object): Camada de persistência responsável pelos comandos SQL (INSERT, SELECT, UPDATE, DELETE).
+
+        View: Interface visual que interage diretamente com o usuário.
+
+🗺️ Mapeamento de Telas vs Exercícios
+
+O sistema unifica todas as demandas do roteiro através de 5 telas dinâmicas acessadas pelo menu de navegação superior:
+Tela no CardLayout	Operação do Sistema	Objetivo Técnico	Exercício Base
+Tela 1	Cadastro de Livros	Captura os campos através de caixas de texto e insere um novo objeto Livro no PostgreSQL.	Exercício 1 e 2
+Tela 2	Consulta por Título	O usuário digita o título do livro. O sistema varre o banco e exibe as informações detalhadas ou a mensagem "Livro não encontrado".	Exercício 2.3
+Tela 3	Exclusão de Livros	Localiza o livro alvo pelo título e realiza a remoção física do registro na base de dados.	Exercício 2.4
+Tela 4	Atualização Geral	Permite buscar um livro existente, carrega os dados atuais nos campos e disponibiliza a edição de qualquer atributo via botão "Atualizar".	Exercício 2.5
+Tela 5	Visão Geral (Completa)	Exibe uma tabela estruturada (JTable) listando todos os livros salvos e seus respectivos atributos em tempo real.	Exercício 2.6
+🚀 Como este repositório está organizado
+
+A estrutura de pacotes dentro da pasta src/ segue estritamente as boas práticas de desenvolvimento Java:
+
+    br.com.cadlivro.model: Contém a classe Livro.java com atributos como título, autor, editora, total de páginas e a lógica do método virarPagina().
+
+    br.com.cadlivro.database: Armazena a classe de conexão JDBC (ConexaoBanco.java) responsável por autenticar e comunicar o Java com o servidor PostgreSQL.
+
+    br.com.cadlivro.dao: Concentra as instruções SQL preparadas (PreparedStatement) para transacionar com segurança as operações do CRUD.
+
+    br.com.cadlivro.view: Agrupa a janela principal MainFrame.java com a barra de menus e os subpainéis que dão vida à interface gráfica.
+
+    💡 Nota de Execução: Para rodar este projeto localmente, certifique-se de possuir o driver JDBC do PostgreSQL (postgresql-42.x.x.jar) adicionado às bibliotecas do seu ambiente de desenvolvimento e configure as credenciais de acesso no arquivo de conexão do banco de dados.
